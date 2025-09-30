@@ -1,0 +1,30 @@
+name: Deploy to GitHub Pages (Windows)
+
+on:
+  push:
+    branches:
+      - main  # غيّره إلى master إن كنت تستخدمه
+
+jobs:
+  deploy:
+    runs-on: windows-latest  # <-- تشغيل على بيئة Windows
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'  # يمكن تغييره أو حذفه لو غير مستخدم
+
+    - name: Build Project
+      run: |
+        echo No build needed for static HTML
+        REM ضع هنا أوامر البناء إن وجدت
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .\
